@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { clerkClient, clerkMiddleware, getAuth } from '@clerk/express';
 
 const app = express();
@@ -8,7 +8,7 @@ app.use(clerkMiddleware());
 const port = 3000;
 
 // Declare a route and access the auth state for this request
-app.get('/', async (req: Request, res: Response) => {
+app.get('/', async (req, res) => {
   const { userId } = getAuth(req);
   const user = userId ? await clerkClient.users.getUser(userId) : null;
 
@@ -16,7 +16,7 @@ app.get('/', async (req: Request, res: Response) => {
 });
 
 // Protect a route and return 401 if user is unauthenticated
-app.get('/protected', async (req: Request, res: Response) => {
+app.get('/protected', async (req, res) => {
   const { userId } = getAuth(req);
 
   if (!userId) {
