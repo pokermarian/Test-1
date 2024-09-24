@@ -20,7 +20,7 @@ app.get('/protected', async (req, res) => {
   const { userId } = getAuth(req);
 
   if (!userId) {
-    return res.status(403).send('Unauthorized request.');
+    return res.status(401).send('Unauthorized request.');
   }
 
   const user = await clerkClient.users.getUser(userId);
