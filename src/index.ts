@@ -3,24 +3,17 @@ import express from 'express';
 import { clerkClient, clerkMiddleware, getAuth } from '@clerk/express';
 
 const app = express();
+const PORT = 3000;
+
 app.use(clerkMiddleware());
 
-const port = 3000;
-
-// Declare a route and access the auth state for this request
+// Use getAuth() to protect this route
+// and get the user's User object
 app.get('/', async (req, res) => {
-  const { userId } = getAuth(req);
-  const user = userId ? await clerkClient.users.getUser(userId) : null;
-
-  return res.json({ user });
-});
-
-// Protect a route and return 401 if user is unauthenticated
-app.get('/protected', async (req, res) => {
   const { userId } = getAuth(req);
 
   if (!userId) {
-    return res.status(401).send('Unauthorized request.');
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   const user = await clerkClient.users.getUser(userId);
@@ -28,6 +21,6 @@ app.get('/protected', async (req, res) => {
   return res.json({ user });
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`);
 });
