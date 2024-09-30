@@ -33,8 +33,8 @@ After following the quickstart you'll have learned how to:
 
 - Install `@clerk/express`
 - Set your Clerk API keys
-- Add Clerk middleware to your application
-- Access auth state using `getAuth()`
+- Add `clerkMiddleware()` to your application
+- Protect your routes using `requireAuth()`
 
 ## Deploy
 
