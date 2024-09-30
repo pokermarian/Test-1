@@ -1,21 +1,23 @@
 import 'dotenv/config';
 import express from 'express';
-import { clerkClient, clerkMiddleware, getAuth } from '@clerk/express';
+import {
+  clerkClient,
+  clerkMiddleware,
+  getAuth,
+  requireAuth,
+} from '@clerk/express';
 
 const app = express();
 const PORT = 3000;
 
 app.use(clerkMiddleware());
 
-// Use getAuth() to protect this route
-// and get the user's User object
-app.get('/', async (req, res) => {
+// Use requireAuth() to protect this route
+app.get('/protected', requireAuth(), async (req, res) => {
+  // Use `getAuth()` to get the user's `userId`
   const { userId } = getAuth(req);
 
-  if (!userId) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
+  // Use Clerk's JavaScript Backend SDK to get the user's User object
   const user = await clerkClient.users.getUser(userId);
 
   return res.json({ user });
