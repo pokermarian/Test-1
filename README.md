@@ -29,7 +29,7 @@
 
 Clerk is a developer-first authentication and user management solution. It provides pre-built React components and hooks for sign-in, sign-up, user profile, and organization management. Clerk is designed to be easy to use and customize, and can be dropped into any application.
 
-After following the quickstart you'll have learned how to:
+After following the [quickstart](https://clerk.com/docs/quickstarts/express), you'll have learned how to:
 
 - Install `@clerk/express`
 - Set your Clerk API keys
