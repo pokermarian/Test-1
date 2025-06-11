@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "@clerk/express": "^1.5.2",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1",
+    "svix": "^1.66.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.2",
